@@ -9,5 +9,5 @@ app.get('/api/info', (req, res) => {
 app.post('/api/v1/getback', (req, res) => {
   res.send({ ...req.body });
 });
-//test comment aug 12 2021 15:42
+//test comment aug 12 2021 17:09
 module.exports.handler = serverless(app);
