@@ -21,3 +21,10 @@ phases:
       - zip -qr "$DEPLOY_S3_ARTIFACTS_FILENAME" .
       # Upload workspace archive(s) to S3
       - aws s3 cp "$DEPLOY_S3_ARTIFACTS_FILENAME" s3://${DEPLOY_S3_ARTIFACTS_BUCKET}/${DEPLOY_S3_ARTIFACTS_FOLDER}/${DEPLOY_S3_ARTIFACTS_FILENAME}
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: base_dir
+  name: build-artifact-name
+  discard-paths: no
