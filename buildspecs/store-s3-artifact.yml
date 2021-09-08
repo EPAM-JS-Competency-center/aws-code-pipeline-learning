@@ -1,0 +1,23 @@
+version: 0.2
+
+env:
+  variables:
+    DEPLOY_S3_ARTIFACTS_BUCKET: "code-deploy-app-bucket"
+    DEPLOY_S3_ARTIFACTS_FOLDER: "my-apps"
+    DEPLOY_S3_ARTIFACTS_FILENAME: "app.zip"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+
+  build:
+    commands:
+      - echo Build has been started.
+      # Update system packages
+      - apt-get update -y -q || true
+      - npm install
+      # Archive workspace
+      - zip -qr "$DEPLOY_S3_ARTIFACTS_FILENAME" .
+      # Upload workspace archive(s) to S3
+      - aws s3 cp "$DEPLOY_S3_ARTIFACTS_FILENAME" s3://${DEPLOY_S3_ARTIFACTS_BUCKET}/${DEPLOY_S3_ARTIFACTS_FOLDER}/${DEPLOY_S3_ARTIFACTS_FILENAME}
