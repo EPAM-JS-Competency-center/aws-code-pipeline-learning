@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: install.txt
-    destination: /tmp/CodeDeployExample
+    destination: /tmp/CodePipelineExample
 hooks:
   BeforeInstall:
     - location: ./scripts/before-install.sh
